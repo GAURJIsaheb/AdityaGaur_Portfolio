@@ -16,14 +16,8 @@ const Landing = ({ children }: PropsWithChildren) => {
           </div>
           <div className="landing-info">
             <h3>Software Engineer</h3>
-            <h2 className="landing-info-h2">
-              <div className="landing-h2-1">Full-stack Web</div>
-              <div className="landing-h2-2">AI Tooling</div>
-            </h2>
-            <h2>
-              <div className="landing-h2-info">B.Tech, Bhagwan Parshuram Institute of Technology</div>
-              <div className="landing-h2-info-1">Delhi, India</div>
-            </h2>
+            <h2 className="landing-info-h2">Full-stack Web Developer</h2>
+
             <p className="landing-summary">
               Building resilient, offline-friendly platforms and AI-enhanced experiences with TypeScript, Node.js, and modern design systems.
             </p>
