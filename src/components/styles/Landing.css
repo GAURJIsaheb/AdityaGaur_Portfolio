@@ -3,13 +3,22 @@
   max-width: var(--cMaxWidth);
   margin: auto;
   position: relative;
-  height: var(--vh);
+  /* Mobile: let content grow naturally; desktop keeps fixed vh */
+  min-height: var(--vh);
 }
 
 .landing-container {
   width: var(--cWidth);
   margin: auto;
-  height: 100%;
+  /* Mobile: flex column so intro + info stack without overlap */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  /* push content below navbar (~70px) + safe breathing room */
+  padding-top: clamp(80px, 14vw, 120px);
+  padding-bottom: clamp(60px, 10vw, 100px);
+  box-sizing: border-box;
   position: relative;
   max-width: var(--cMaxWidth);
 }
@@ -160,14 +169,14 @@
 
 /* ──────────────────────────────────────────
    Intro block  (Hello! I'm / Name)
-   Mobile  → top-left, floats above character
+   Mobile  → stacks in flex column, no absolute
    Desktop → centred left of character
    ────────────────────────────────────────── */
 .landing-intro {
-  position: absolute;
+  position: relative;
   z-index: 9;
-  top: 12%;
-  left: 0;
+  top: auto;
+  left: auto;
 }
 
 .landing-intro h2 {
@@ -189,7 +198,7 @@
 
 /* ──────────────────────────────────────────
    Info block  (Role / Tagline / Summary)
-   Mobile  → flows below intro
+   Mobile  → flows below intro in flex column
    Desktop → centred right of character
    ────────────────────────────────────────── */
 .landing-info {
@@ -249,6 +258,20 @@
 
 /* ── 1025 px+  →  desktop two-column layout ── */
 @media screen and (min-width: 1025px) {
+  /* Restore full-vh height on desktop */
+  .landing-section {
+    height: var(--vh);
+    min-height: unset;
+  }
+
+  /* Switch container back to absolute positioning context */
+  .landing-container {
+    display: block;
+    height: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .character-model {
     height: 100vh;
     bottom: 0;
@@ -262,6 +285,7 @@
   }
 
   .landing-intro {
+    position: absolute;
     top: 50%;
     left: auto;
     right: 66%;
@@ -269,6 +293,7 @@
   }
 
   .landing-info {
+    position: absolute;
     bottom: auto;
     top: 51%;
     z-index: inherit;

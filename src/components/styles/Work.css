@@ -25,6 +25,8 @@
 .carousel-wrapper {
   position: relative;
   width: 100%;
+  /* space below track for dots + mobile arrows */
+  padding-bottom: 60px;
 }
 
 .carousel-track-container {
@@ -36,12 +38,16 @@
 
 .carousel-track {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* no gap — slides must be flush side-by-side */
+  gap: 0;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
 .carousel-slide {
-  min-width: 100%;
+  /* Each slide = 1 / N of the track width = 100% of the container */
+  min-width: calc(100% / 3);
+  width: calc(100% / 3);
   flex-shrink: 0;
   box-sizing: border-box;
   padding: clamp(24px, 4vw, 50px) 0;
@@ -184,7 +190,7 @@
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .carousel-dot {
@@ -291,11 +297,18 @@
   }
 }
 
+/* On mobile: float arrows under the dots row */
 @media only screen and (max-width: 600px) {
-  /* On very small screens put arrows inside the track row */
+  /* Give wrapper more room for arrows below dots */
+  .carousel-wrapper {
+    padding-bottom: 90px;
+  }
+
+  /* Arrows sit in a row centered below the dots */
   .carousel-arrow {
     top: auto;
-    bottom: -60px;
+    /* dots are ~24px margin + 10px dot + some breathing room */
+    bottom: 8px;
     transform: none;
   }
 
@@ -307,7 +320,9 @@
     right: calc(50% - 56px);
   }
 
+  /* Overlap arrow area: push dots up a bit so there’s a clean gap */
   .carousel-dots {
-    margin-top: 70px;
+    margin-top: 20px;
+    margin-bottom: 50px;
   }
 }
