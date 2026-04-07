@@ -3,6 +3,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import Lenis from "lenis";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
+import { TbNotes } from "react-icons/tb";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,7 +14,7 @@ export let lenis: Lenis | null = null;
 
 const Navbar = () => {
   useEffect(() => {
-    // Remove the smooth-wrapper/smooth-content height locking (was needed for ScrollSmoother)
+    // Remove the smooth-wrapper/smooth-content height locking
     const wrapper = document.getElementById("smooth-wrapper");
     const content = document.getElementById("smooth-content");
     if (wrapper) wrapper.style.cssText = "";
@@ -26,7 +28,7 @@ const Navbar = () => {
       smoothWheel: true,
     });
 
-    // Pause at start (same behaviour as before — initialFX resumes it)
+    // Pause at start — initialFX resumes it
     lenis.stop();
 
     // Sync Lenis with GSAP ScrollTrigger
@@ -37,7 +39,7 @@ const Navbar = () => {
     gsap.ticker.lagSmoothing(0);
 
     // Nav link click → smooth scroll to section
-    let links = document.querySelectorAll(".header ul a");
+    let links = document.querySelectorAll(".header ul a[data-href]");
     links.forEach((elem) => {
       let element = elem as HTMLAnchorElement;
       element.addEventListener("click", (e) => {
@@ -65,9 +67,12 @@ const Navbar = () => {
   return (
     <>
       <div className="header">
+        {/* ── Brand ── */}
         <a href="/#" className="navbar-title" data-cursor="disable">
           AG
         </a>
+
+        {/* ── Centre email (hidden on small screens) ── */}
         <a
           href="mailto:adityagaur086@gmail.com"
           className="navbar-connect"
@@ -75,6 +80,8 @@ const Navbar = () => {
         >
           adityagaur086@gmail.com
         </a>
+
+        {/* ── Right-side nav ── */}
         <ul>
           <li>
             <a data-href="#about" href="#about">
@@ -89,6 +96,40 @@ const Navbar = () => {
           <li>
             <a data-href="#contact" href="#contact">
               <HoverLinks text="CONTACT" />
+            </a>
+          </li>
+          <li className="navbar-resume-li">
+            <a
+              href="/AdityaGaur_Resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="navbar-resume"
+              data-cursor="disable"
+            >
+              <HoverLinks text="RESUME" />
+              <TbNotes className="navbar-resume-icon" />
+            </a>
+          </li>
+
+          {/* ── Social icons — live in nav, no more floating ── */}
+          <li className="navbar-socials">
+            <a
+              href="https://github.com/GAURJIsaheb"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+              data-cursor="disable"
+            >
+              <FaGithub />
+            </a>
+            <a
+              href="https://linkedin.com/in/adityagaur01"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+              data-cursor="disable"
+            >
+              <FaLinkedinIn />
             </a>
           </li>
         </ul>

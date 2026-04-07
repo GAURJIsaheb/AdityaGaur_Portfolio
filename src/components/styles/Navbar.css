@@ -3,7 +3,8 @@
   max-width: var(--cMaxWidth);
   width: var(--cWidth);
   justify-content: space-between;
-  padding: 20px 0px;
+  align-items: center;
+  padding: 16px 0px;
   margin-bottom: -100px;
   box-sizing: border-box;
   position: fixed;
@@ -12,72 +13,118 @@
   top: 0;
   z-index: 9999;
 }
+
+/* ── Nav list ── */
 .header ul {
   font-size: 12px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin: 0;
   padding: 0;
   list-style: none;
-  column-gap: 40px;
-  row-gap: 8px;
-  align-items: end;
+  column-gap: clamp(14px, 2.5vw, 50px);
+  align-items: center;
 }
+
 .header ul li {
-  margin-left: 0px;
+  margin-left: 0;
   letter-spacing: 1px;
-  color: #ccc;
+  color: #eae5ec;
   font-weight: 600;
   cursor: pointer;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
 }
+
+/* ── Centre email ── */
 .navbar-connect {
   position: absolute;
   display: none;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  font-size: 15px;
+  font-size: clamp(12px, 1.2vw, 15px);
   letter-spacing: 1px;
   font-weight: 500;
+  white-space: nowrap;
 }
+
+/* ── Brand / Logo ── */
 .navbar-title {
   font-weight: 700;
-  font-size: 14px;
+  font-size: clamp(13px, 1.5vw, 18px);
   letter-spacing: 0.2px;
+  white-space: nowrap;
 }
-@media only screen and (min-width: 500px) {
-  .header {
-    padding: 20px 0px;
-  }
-  .header ul {
-    flex-direction: row;
-    align-items: center;
-    font-size: 14px;
-  }
-  .header ul li {
-    color: #eae5ec;
-  }
-  .navbar-title {
-    font-size: 16px;
-  }
+
+/* ── Resume nav item ── */
+.navbar-resume-li {
+  /* Slight visual separator before Resume */
+  padding-left: clamp(4px, 1vw, 12px);
 }
+
+.navbar-resume {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--accentColor);
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.navbar-resume:hover {
+  color: var(--accentColor);
+  opacity: 0.75;
+}
+
+.navbar-resume-icon {
+  font-size: 1.1em;
+  margin-top: 1px;
+}
+
+/* ── Social icons inside nav ── */
+.navbar-socials {
+  display: none;           /* hidden on small phones */
+  gap: clamp(10px, 1.5vw, 20px) !important;
+  align-items: center;
+}
+
+.navbar-socials a {
+  font-size: clamp(16px, 1.6vw, 22px);
+  display: flex;
+  align-items: center;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.navbar-socials a:hover {
+  color: var(--accentColor);
+}
+
+/* ── Show email at 900px ── */
 @media only screen and (min-width: 900px) {
   .navbar-connect {
     display: block;
   }
 }
+
+/* ── Show socials at 640px ── */
+@media only screen and (min-width: 640px) {
+  .navbar-socials {
+    display: flex;
+  }
+}
+
+/* ── Large screens ── */
 @media only screen and (min-width: 1200px) {
   .header {
-    padding: 35px 0px;
+    padding: 28px 0px;
   }
+
   .header ul {
-    column-gap: 80px;
-    font-size: 16px;
-  }
-  .navbar-connect {
-    font-size: 16px;
-  }
-  .navbar-title {
-    font-size: 18px;
+    font-size: 14px;
   }
 }

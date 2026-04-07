@@ -30,6 +30,7 @@ const WorkImage = (props: Props) => {
         onMouseLeave={() => setIsVideo(false)}
         target="_blank"
         data-cursor={"disable"}
+        style={{ display: "block", width: "100%" }}
       >
         {props.link && (
           <div className="work-link">

@@ -19,12 +19,25 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(0);
 
+  // Lock scroll while loading screen is visible, release when done
+  useEffect(() => {
+    document.body.classList.add("is-loading");
+    return () => {
+      document.body.classList.remove("is-loading");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      document.body.classList.remove("is-loading");
+    }
+  }, [isLoading]);
+
   const value = {
     isLoading,
     setIsLoading,
     setLoading,
   };
-  useEffect(() => {}, [loading]);
 
   return (
     <LoadingContext.Provider value={value as LoadingType}>
